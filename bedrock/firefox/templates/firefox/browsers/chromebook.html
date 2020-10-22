@@ -1,0 +1,91 @@
+{# This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/. -#}
+
+{% from "macros-protocol.html" import feature_card, hero with context %}
+{% from "macros.html" import google_play_button with context %}
+
+{% extends "firefox/base/base-protocol.html" %}
+
+{% block page_title %}{{ ftl('get-firefox-browser') }}{% endblock %}
+
+{% block page_desc %} {{ ftl('so-youve-got') }} {% endblock %}
+
+{% block page_css %}
+  {{ css_bundle('chromebook') }}
+{% endblock %}
+
+{% block content %}
+<div class="mzp-l-content">
+  {% call hero(
+    title=ftl('get-firefox-browser'),
+    class='mzp-has-image mzp-t-firefox mzp-t-product-firefox',
+    image_url='img/firefox/browsers/quantum/browser.jpg',
+    include_cta=True,
+    heading_level=1
+  ) %}
+  <p>{{ ftl('so-youve-got') }}</p>
+
+  <div class="mzp-c-menu-list mzp-t-cta mzp-t-download" id="chromebook-download-list">
+    <h4 class="mzp-c-menu-list-title">{{ ftl('firefox-select-your-download') }}</h4>
+    <ul class="mzp-c-menu-list-list download-platform-list">
+      <li class="mzp-c-menu-list-item">
+        <a href="{{ firefox_adjust_url('android', 'firefox-browsers-faq') }}" rel="external noopener" data-link-type="download" data-display-name="Android" data-download-version="android" data-download-os="Android">
+          {{ ftl('get-firefox-for') }}
+          <p><small>{{ ftl('x86-based-chromebook') }}</small></p>
+        </a>
+      </li>
+      <li class="mzp-c-menu-list-item t-sumo">
+        <a href="https://support.mozilla.org/en-US/kb/run-firefox-chromeos?utm_source=www.mozilla.org-firefox-browsers-chromebook&amp;utm_medium=referral&amp;utm_campaign=seo" data-display-name="Get Firefox Desktop for Chromebook">
+          {{ ftl('get-firefox-desktop') }}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  {% endcall %}
+
+  <section>
+    <h2>{{ ftl('why-get-firefox') }}</h2>
+    {% call feature_card(
+      image_url='img/firefox/browsers/chromebook/shield.png',
+      aspect_ratio='mzp-has-aspect-1-1',
+      class='mzp-l-card-feature-left-half mzp-t-firefox'
+    ) %}
+
+      <p>{{ ftl('while-a-chromebook') }}</p>
+      <ul class="mzp-u-list-styled">
+        <li>{{ ftl('alwayson-tracking-protection') }}</li>
+        <li>{{ ftl('supporting-independent-technology') }}</li>
+      </ul>
+    {% endcall %}
+  </section>
+
+  <section>
+    <div class="mzp-l-content mzp-t-content-md">
+      <h2>{{ ftl('is-it-hard') }}</h2>
+      <p>{{ ftl('we-wish-it') }}</p>
+    </div>
+
+    <div class="mzp-l-content mzp-l-card-half">
+      <div class="mzp-c-card">
+        {{ high_res_img('img/firefox/browsers/chromebook/mobile.png', {'width': '436', 'height': '463', 'loading': 'lazy', 'alt': '' }) }}
+        <p>{{ ftl('install-firefox-from') }}</p>
+        {{ google_play_button(href=android_url, id='play-store-link') }}
+      </div>
+
+      <div class="mzp-c-card">
+        {{ high_res_img('img/firefox/browsers/chromebook/addon.png', {'width': '436', 'height': '463', 'loading': 'lazy', 'alt': '' }) }}
+        {% set internet_attrs = 'href="%s" data-cta-type="link" data-cta-text="Personal Data Promise"'|safe|format(url('firefox.privacy.index')) %}
+        <p>{{ ftl('install-firefox-as', url='https://support.mozilla.org/en-US/kb/run-firefox-chromeos?utm_source=www.mozilla.org-firefox-faq&amp;utm_medium=referral&amp;utm_campaign=seo') }}</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}
+
+{% block js %}
+  {{ js_bundle('chromebook') }}
+{% endblock %}
+
