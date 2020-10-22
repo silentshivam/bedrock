@@ -721,6 +721,12 @@
         "css/firefox/browsers/quantum.scss"
       ],
       "name": "quantum"
+    },
+    {
+      "files": [
+        "css/firefox/sync.scss"
+      ],
+      "name": "sync"
     }
   ],
   "js": [
