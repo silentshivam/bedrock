@@ -12,6 +12,7 @@ so-youve-got = So you’ve got a { -brand-name-chromebook } — now it’s time 
 get-firefox-for = Get { -brand-name-firefox } for { -brand-name-android }
 get-firefox-desktop = Get { -brand-name-firefox } Desktop for { -brand-name-chromebook }
 x86-based-chromebook = *x86 based { -brand-name-chromebook } running { -brand-name-chromeos } 80 or later
+dropdown-copy = Get { -brand-name-firefox } for { -brand-name-chromebook }
 
 # The span here is to display an underline underneath "Firefox"
 why-get-firefox = Why get <span>{ -brand-name-firefox }</span> for { -brand-name-chromebook }?
@@ -22,7 +23,6 @@ supporting-independent-technology = Supporting independent technology: since mos
 is-it-hard = Is it hard to install { -brand-name-firefox } for { -brand-name-chromebook }?
 we-wish-it = We wish it were more straightforward, but your { -brand-name-chromebook } would prefer to keep you in the { -brand-name-google-play } ecosystem. But, we think it’s worth the effort to install the { -brand-name-firefox } browser to your { -brand-name-chromebook } – and we’ve got resources to help you if you need them. There are two ways to get { -brand-name-firefox } on your device.
 install-firefox-from = Install { -brand-name-firefox } from { -brand-name-google-play } Store: on newer versions of { -brand-name-chromeos } (x86 based { -brand-name-chromebook } running { -brand-name-chromeos } 80 or later), you have the option to install the { -brand-name-firefox } for { -brand-name-android } app. This app is developed for mobile devices.
--firefox-select-your-download = Select your download
 
 # Variables:
 # $url (url) - link to https://support.mozilla.org/en-US/kb/run-firefox-chromeos

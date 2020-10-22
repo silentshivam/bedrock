@@ -27,7 +27,7 @@
   <p>{{ ftl('so-youve-got') }}</p>
 
   <div class="mzp-c-menu-list mzp-t-cta mzp-t-download" id="chromebook-download-list">
-    <h4 class="mzp-c-menu-list-title">{{ ftl('firefox-select-your-download') }}</h4>
+    <h4 class="mzp-c-menu-list-title">{{ ftl('dropdown-copy') }}</h4>
     <ul class="mzp-c-menu-list-list download-platform-list">
       <li class="mzp-c-menu-list-item">
         <a href="{{ firefox_adjust_url('android', 'firefox-browsers-faq') }}" rel="external noopener" data-link-type="download" data-display-name="Android" data-download-version="android" data-download-os="Android">
@@ -69,14 +69,13 @@
 
     <div class="mzp-l-content mzp-l-card-half">
       <div class="mzp-c-card">
-        {{ high_res_img('img/firefox/browsers/chromebook/mobile.png', {'width': '436', 'height': '463', 'loading': 'lazy', 'alt': '' }) }}
+        <img src="{{ static('img/firefox/browsers/chromebook/mobile.png') }}" class="mzp-c-billboard-image" width="436" height="463" alt="">
         <p>{{ ftl('install-firefox-from') }}</p>
         {{ google_play_button(href=android_url, id='play-store-link') }}
       </div>
 
       <div class="mzp-c-card">
-        {{ high_res_img('img/firefox/browsers/chromebook/addon.png', {'width': '436', 'height': '463', 'loading': 'lazy', 'alt': '' }) }}
-        {% set internet_attrs = 'href="%s" data-cta-type="link" data-cta-text="Personal Data Promise"'|safe|format(url('firefox.privacy.index')) %}
+        <img src="{{ static('img/firefox/browsers/chromebook/addon.png') }}" class="mzp-c-billboard-image" width="436" height="463" alt="">
         <p>{{ ftl('install-firefox-as', url='https://support.mozilla.org/en-US/kb/run-firefox-chromeos?utm_source=www.mozilla.org-firefox-faq&amp;utm_medium=referral&amp;utm_campaign=seo') }}</p>
       </div>
     </div>
