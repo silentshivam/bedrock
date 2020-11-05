@@ -226,7 +226,7 @@ describe('all-downloads-unified.js', function() {
         });
     });
 
-    describe('generateDownloadURL', function() {
+    describe('setDownloadButton', function() {
         var product = {
             id: 'desktop_beta',
             label: 'Firefox Beta'
@@ -288,7 +288,7 @@ describe('all-downloads-unified.js', function() {
             spyOn(Mozilla.FirefoxDownloader, 'setDownloadLink');
             spyOn(Mozilla.FirefoxDownloader, 'setDownloadInfo');
             spyOn(Mozilla.FirefoxDownloader, 'offError');
-            Mozilla.FirefoxDownloader.generateDownloadURL();
+            Mozilla.FirefoxDownloader.setDownloadButton();
             expect(Mozilla.FirefoxDownloader.setDownloadLink).toHaveBeenCalledWith('https://download.mozilla.org/?product=firefox-beta-latest-ssl&os=win64&lang=ach', product, platform, language);
             expect(Mozilla.FirefoxDownloader.setDownloadInfo).toHaveBeenCalledWith(product.label, platform.label, language.label);
             expect(Mozilla.FirefoxDownloader.offError).toHaveBeenCalled();
@@ -333,12 +333,12 @@ describe('all-downloads-unified.js', function() {
 
             spyOn(Mozilla.FirefoxDownloader, 'setFormSelection');
             spyOn(Mozilla.FirefoxDownloader, 'setAllSelectOptions');
-            spyOn(Mozilla.FirefoxDownloader, 'generateDownloadURL');
+            spyOn(Mozilla.FirefoxDownloader, 'setDownloadButton');
 
             Mozilla.FirefoxDownloader.onVersionChange(e);
             expect(Mozilla.FirefoxDownloader.setFormSelection).not.toHaveBeenCalled();
             expect(Mozilla.FirefoxDownloader.setAllSelectOptions).toHaveBeenCalledWith(e.target.value, jasmine.any(Object));
-            expect(Mozilla.FirefoxDownloader.generateDownloadURL).toHaveBeenCalled();
+            expect(Mozilla.FirefoxDownloader.setDownloadButton).toHaveBeenCalled();
         });
 
         it('should update the product selection for ESR', function() {
@@ -350,7 +350,7 @@ describe('all-downloads-unified.js', function() {
 
             spyOn(Mozilla.FirefoxDownloader, 'setFormSelection');
             spyOn(Mozilla.FirefoxDownloader, 'setAllSelectOptions');
-            spyOn(Mozilla.FirefoxDownloader, 'generateDownloadURL');
+            spyOn(Mozilla.FirefoxDownloader, 'setDownloadButton');
 
             Mozilla.FirefoxDownloader.onVersionChange(e);
             expect(Mozilla.FirefoxDownloader.setFormSelection).toHaveBeenCalledWith(e.target.value);
@@ -385,21 +385,21 @@ describe('all-downloads-unified.js', function() {
             var id = 'firefox_beta';
             spyOn(Mozilla.FirefoxDownloader, 'getHash').and.returnValue(id);
             spyOn(Mozilla.FirefoxDownloader, 'setProductSelection');
-            spyOn(Mozilla.FirefoxDownloader, 'generateDownloadURL');
+            spyOn(Mozilla.FirefoxDownloader, 'setDownloadButton');
 
             Mozilla.FirefoxDownloader.onHashChange();
             expect(Mozilla.FirefoxDownloader.setProductSelection).toHaveBeenCalledWith(id);
-            expect(Mozilla.FirefoxDownloader.generateDownloadURL).toHaveBeenCalled();
+            expect(Mozilla.FirefoxDownloader.setDownloadButton).toHaveBeenCalled();
         });
 
         it('should not update the product selection if a hash identifier is invalid', function() {
             spyOn(Mozilla.FirefoxDownloader, 'getHash').and.returnValue(null);
             spyOn(Mozilla.FirefoxDownloader, 'setProductSelection');
-            spyOn(Mozilla.FirefoxDownloader, 'generateDownloadURL');
+            spyOn(Mozilla.FirefoxDownloader, 'setDownloadButton');
 
             Mozilla.FirefoxDownloader.onHashChange();
             expect(Mozilla.FirefoxDownloader.setProductSelection).not.toHaveBeenCalled();
-            expect(Mozilla.FirefoxDownloader.generateDownloadURL).not.toHaveBeenCalled();
+            expect(Mozilla.FirefoxDownloader.setDownloadButton).not.toHaveBeenCalled();
         });
     });
 
@@ -415,7 +415,7 @@ describe('all-downloads-unified.js', function() {
             spyOn(Mozilla.FirefoxDownloader, 'setHash');
             spyOn(Mozilla.FirefoxDownloader, 'setFormSelection');
             spyOn(Mozilla.FirefoxDownloader, 'setAllSelectOptions');
-            spyOn(Mozilla.FirefoxDownloader, 'generateDownloadURL');
+            spyOn(Mozilla.FirefoxDownloader, 'setDownloadButton');
             spyOn(Mozilla.FirefoxDownloader, 'enableForm');
         });
 
@@ -427,7 +427,7 @@ describe('all-downloads-unified.js', function() {
 
             Mozilla.FirefoxDownloader.init();
             expect(Mozilla.FirefoxDownloader.setAllSelectOptions).toHaveBeenCalledTimes(2);
-            expect(Mozilla.FirefoxDownloader.generateDownloadURL).toHaveBeenCalled();
+            expect(Mozilla.FirefoxDownloader.setDownloadButton).toHaveBeenCalled();
             expect(Mozilla.FirefoxDownloader.enableForm).toHaveBeenCalled();
             expect(Mozilla.FirefoxDownloader.setHash).toHaveBeenCalled();
         });
@@ -455,7 +455,7 @@ describe('all-downloads-unified.js', function() {
 
             Mozilla.FirefoxDownloader.init();
             expect(Mozilla.FirefoxDownloader.setAllSelectOptions).not.toHaveBeenCalled();
-            expect(Mozilla.FirefoxDownloader.generateDownloadURL).not.toHaveBeenCalled();
+            expect(Mozilla.FirefoxDownloader.setDownloadButton).not.toHaveBeenCalled();
             expect(Mozilla.FirefoxDownloader.enableForm).not.toHaveBeenCalled();
             expect(Mozilla.FirefoxDownloader.setHash).not.toHaveBeenCalled();
             expect(Mozilla.FirefoxDownloader.onError).toHaveBeenCalled();

@@ -257,6 +257,7 @@
     FirefoxDownloader.onError = function(e) {
         // show form error and hide download button.
         downloadInfo.classList.add('has-error');
+        FirefoxDownloader.showButton('none');
 
         // show the fallback list of locales.
         document.getElementById('all-downloads').classList.add('is-fallback');
@@ -293,21 +294,28 @@
     /**
      * Generate the download URL for the form button, based on the current for selection.
      */
-    FirefoxDownloader.generateDownloadURL = function() {
+    /**
+     *
+     */
+    FirefoxDownloader.setDownloadButton = function() {
         var product = FirefoxDownloader.getProductSelection();
         var platform = FirefoxDownloader.getPlatformSelection(product);
         var language = FirefoxDownloader.getLanguageSelection(product);
         var version = FirefoxDownloader.getVersionSelection(product);
+        FirefoxDownloader.setDownloadInfo(product.label, platform.label, language.label);
 
-        // Use `version.id` as ESR can sometimes offer 2 builds simultaneously.
-        var download = FirefoxDownloader.getDownloadLink(version.id, platform.id, language.id);
-
-        if (FirefoxDownloader.isValidURL(download)) {
-            FirefoxDownloader.setDownloadLink(download, product, platform, language);
-            FirefoxDownloader.setDownloadInfo(product.label, platform.label, language.label);
+        if(product.id.indexOf('android') == 0) {
+            FirefoxDownloader.offError();
+        } else if(product.id.indexOf('ios') == 0) {
             FirefoxDownloader.offError();
         } else {
-            FirefoxDownloader.onError(download);
+            var downloadURL = FirefoxDownloader.getDownloadLink(version.id, platform.id, language.id);
+            if (FirefoxDownloader.isValidURL(downloadURL)) {
+                FirefoxDownloader.setDownloadLink(downloadURL, product, platform, language);
+                FirefoxDownloader.offError();
+            } else {
+                FirefoxDownloader.onError(downloadURL);
+            }
         }
     };
 
@@ -326,7 +334,7 @@
      */
     FirefoxDownloader.onProductChange = function(e) {
         FirefoxDownloader.setFormSelection(e.target.value);
-        FirefoxDownloader.generateDownloadURL();
+        FirefoxDownloader.setDownloadButton();
         FirefoxDownloader.setHash(e.target.value);
     };
 
@@ -340,7 +348,7 @@
             FirefoxDownloader.setFormSelection(e.target.value);
         }
         FirefoxDownloader.setAllSelectOptions(e.target.value, versionSelect);
-        FirefoxDownloader.generateDownloadURL();
+        FirefoxDownloader.setDownloadButton();
     };
 
     /**
@@ -349,7 +357,7 @@
      */
     FirefoxDownloader.onPlatformChange = function(e) {
         FirefoxDownloader.setAllSelectOptions(e.target.value, platformSelect);
-        FirefoxDownloader.generateDownloadURL();
+        FirefoxDownloader.setDownloadButton();
     };
 
     /**
@@ -358,7 +366,7 @@
      */
     FirefoxDownloader.onLanguageChange = function(e) {
         FirefoxDownloader.setAllSelectOptions(e.target.value, languageSelect);
-        FirefoxDownloader.generateDownloadURL();
+        FirefoxDownloader.setDownloadButton();
     };
 
     /**
@@ -437,10 +445,13 @@
             hash = 'android_release';
             break;
         case 'product-android-beta':
-            hash = 'android_beta';
+            hash = 'android_release'; // beta removed, use release
             break;
         case 'product-android-nightly':
-            hash = 'android_nightly';
+            hash = 'android_release'; // nightly removed, use release
+            break;
+        case 'product-ios-release':
+            hash = 'ios_release';
             break;
         default:
             hash = null;
@@ -475,7 +486,7 @@
         // Only update the product if the hash is valid.
         if (id) {
             FirefoxDownloader.setProductSelection(id);
-            FirefoxDownloader.generateDownloadURL();
+            FirefoxDownloader.setDownloadButton();
         }
     };
 
@@ -505,7 +516,7 @@
             }
             FirefoxDownloader.setFormSelection(product.id);
             FirefoxDownloader.setAllSelectOptions(pageLang, languageSelect);
-            FirefoxDownloader.generateDownloadURL();
+            FirefoxDownloader.setDownloadButton();
             FirefoxDownloader.enableForm();
         } else {
             FirefoxDownloader.onError();

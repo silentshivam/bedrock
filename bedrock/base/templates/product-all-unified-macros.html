@@ -26,7 +26,7 @@
 {% endmacro %}
 
 {% macro product_options(id, platforms, builds, version, disabled=False, hide_version=False, hide_language=False) %}
-  <div class="c-selection-options" data-product="{{ id }}">
+<div class="c-selection-options" data-product="{{ id }}">
     <p class="c-selection c-selection-version{% if hide_version %} hidden{% endif%}">
       {{ select_version_list(id, version, disabled) }}
     </p>
